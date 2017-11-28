@@ -29,6 +29,7 @@ class _ResBlock(nn.Module):
         x1=self.norm2(x1)
         x1=self.relu(x1)
         x1=self.conv2(x1)
+        print(x,x1)
         x=x+x1
         x=self.norm1(x)
         x=self.relu(x)
