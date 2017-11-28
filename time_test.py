@@ -13,7 +13,7 @@ import math
 import warnings
 
 parser=argparse.ArgumentParser(description='PyTorch Condense Convolutional Networks Training')
-parser.add_argument('--batch', default=32,type=int
+parser.add_argument('--batch', default=32,type=int,
                     help='batch size')
 parser.add_argument('--gpu',
                     help='gpu available')
