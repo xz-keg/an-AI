@@ -82,7 +82,7 @@ class _Value(nn.Module):
         x=self.hidden(x)
         x=self.relu(x)
         x=self.scale(x)
-        x=nn.Tanh(x)
+        x=nn.functional.tanh(x)
         return x
 
 class GoNetWork(nn.Module):
