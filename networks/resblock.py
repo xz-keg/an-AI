@@ -86,7 +86,7 @@ class _Value(nn.Module):
 
 class GoNetWork(nn.Module):
     def __init__(self,input_channel,block_num,komi_type=1):
-        super(GoNetwork,self).__init__()
+        super(GoNetWork,self).__init__()
         self.DenseTower=nn.Sequential()
         self.relu=nn.ReLU(inplace=True)
         conv=_ConvBlock(input_channel,256)
