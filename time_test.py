@@ -17,6 +17,8 @@ parser.add_argument('--batch', default=32,type=int,
                     help='batch size')
 parser.add_argument('--gpu',
                     help='gpu available')
+parser.add_argument('--print_freq',default=100,type=int,
+                    help='print freq')
 args = parser.parse_args()
 os.environ["CUDA_VISIBLE_DEVICES"] = args.gpu
 
@@ -40,7 +42,7 @@ def main():
         policy,value=model(input_var)
         batch_time.update(time.time() - end)
         end = time.time()
-            if i % args.print_freq == 0:
+        if i % args.print_freq == 0:
             print('Test: [{0}/{1}]\t'
                   'Time {batch_time.val:.3f} ({batch_time.avg:.3f})\t'
                   .format(i, 10000, batch_time=batch_time))
