@@ -71,7 +71,7 @@ class _Value(nn.Module):
         self.relu=nn.ReLU(inplace=True)
         
         self.hidden=nn.Linear(361*output_channel,256)
-        self.scale=nn.Linear(256,komi_type=1)
+        self.scale=nn.Linear(256,komi_type)
     
     def forward(self,x):
         x=self.conv(x)
