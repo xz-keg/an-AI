@@ -29,7 +29,7 @@ import torch.nn.parallel
 import torch.backends.cudnn as cudnn
 import torch.optim
 import torch.utils.data
-from models.resblock import GoNetWork
+from networks.resblock import GoNetWork
 def main():
     input=torch.zeros(args.batch,19,19,17)
     input2=torch.zeros(args.batch,19,19,17)
