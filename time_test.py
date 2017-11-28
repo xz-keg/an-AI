@@ -17,7 +17,7 @@ parser.add_argument('--batch', default=32,type=int,
                     help='batch size')
 parser.add_argument('--gpu',
                     help='gpu available')
-parser.add_argument('--print_freq',default=100,type=int,
+parser.add_argument('--print_freq',default=10,type=int,
                     help='print freq')
 args = parser.parse_args()
 os.environ["CUDA_VISIBLE_DEVICES"] = args.gpu
