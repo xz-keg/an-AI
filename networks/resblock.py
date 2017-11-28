@@ -18,8 +18,8 @@ class _ResBlock(nn.Module):
         #input=output, since this is a resnet structure
         super(_ResBlock,self).__init__()
         self.in_channels=input_channel
-        self.conv1=nn.Conv2d(input_channel,res1_channel,[3,3],stride=1)
-        self.conv2=nn.Conv2d(res1_channel,input_channel,[3,3],stride=1)
+        self.conv1=nn.Conv2d(input_channel,res1_channel,[3,3],stride=1,padding=1)
+        self.conv2=nn.Conv2d(res1_channel,input_channel,[3,3],stride=1,padding=1)
         self.norm1=nn.BatchNorm2d(input_channel)
         self.norm2=nn.BatchNorm2d(res1_channel)
         self.relu=nn.ReLU(inplace=True)
@@ -39,7 +39,7 @@ class _ConvBlock(nn.Module):
     def __init__(self,input_channel,output_channel):
         super(_ConvBlock,self).__init__()
         self.in_channels=input_channel
-        self.conv=nn.Conv2d(input_channel,output_channel,[3,3],stride=1)
+        self.conv=nn.Conv2d(input_channel,output_channel,[3,3],stride=1,padding=1)
         self.norm=nn.BatchNorm2d(output_channel)
         self.relu=nn.ReLU(inplace=True)
     def forward(self,x):
