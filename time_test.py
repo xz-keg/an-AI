@@ -50,8 +50,8 @@ class AverageMeter(object):
 
 
 def main():
-    input=torch.zeros(args.batch,19,19,17)
-    input2=torch.zeros(args.batch,19,19,17)
+    input=torch.zeros(args.batch,17,19,19)
+    input2=torch.zeros(args.batch,17,19,19)
     model=GoNetWork(17,39)
     model=torch.nn.DataParallel(model).cuda()
     end = time.time()
