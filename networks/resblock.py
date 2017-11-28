@@ -65,7 +65,7 @@ class _Policy(nn.Module):
 
 class _Value(nn.Module):
     def __init__(self,input_channel,output_channel,komi_type=1):
-        super(_Policy,self).__init__()
+        super(_Value,self).__init__()
         self.conv=nn.Conv2d(input_channel,output_channel,[1,1],stride=1)
         self.norm=nn.BatchNorm2d(output_channel)
         self.relu=nn.ReLU(inplace=True)
