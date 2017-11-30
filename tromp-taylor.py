@@ -1,5 +1,6 @@
 #tromp--tayler scoring
 import torch
+import numpy as np
 
 def scoring(state,komi):
     
