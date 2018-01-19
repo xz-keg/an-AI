@@ -2,10 +2,38 @@ import torch
 import numpy as np
 from makemove import makemove
 class edge():
-    state=torch.zeros(17,19,19)
-    p=
-    q=
-    nvisit=
+    #state=torch.zeros(17,19,19)
+    p=0
+    q=0
+    nvisit=0
+    move=-1
+class node():
+    def __init__(self,state):
+        self.state=state
+        self.statehash=hashstate(state)
+        self.policy,self.value=getnetpred(state)
+        self.score=self.value
+        self.visitcount=1
+        self.edges=[]
+        for i in range(362):
+            self.edges.append(edge())
+            self.edges[i].p=self.policy[i]
+            self.edges[i].move=i
+            self.edges[i].q=self.value
+
+    def expand(self):
+        highest=-0.01
+        highind=-1
+        for i in range(362):
+            if self.edges[i].p/(1+self.edges[i].nvisit)+self.edges[i].q>highest:
+                highest=self.edges[i].p/(1+self.edges[i].nvisit)+self.edges[i].q
+                highind=i
+#makemove
+        return highind
+
+
+#state is different from edge, since it allows multiple edges to gather
+
 
 def hashstate(state):
 #hash a state by
@@ -24,41 +52,13 @@ def hashstate(state):
     for i in range(362):
         a,b=makemave(state,i)
         hash=hash+str(b)
+    return hash
+
 
 
 
 
 def mcts(state,times)
-{
-    allsituation=[]
-    
-    state_count=[]
-    state_next=[]
-    def deepen(state,makemove,getnetpred,id)
-        state_hash=hash(state)
-        #if not at leaf, move on
-        if state_hash in allsituation:
-            ind=allsituation.index(state_hash)
-            policy,value=netpred[ind]
-            state_count+=1
-            
-            move=get_move()
-            makemove(state,move)
-        #if already at leaf, terminates
-        else:
-            allsituation.append(state_hash)
-            ind=len(allsituation)-1
-            policy,value=getnetpred(state)
-            state_count.append(1)
-            policy_count,value_actual=[]
-        
-        return value
 
-#policy, 362 vector
-#value predicted value
-#ncount-- 362 array of each visiting
-#
-# calculate
-#check for all 362 possible cases.
-#
-}
+
+
