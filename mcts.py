@@ -7,6 +7,7 @@ class edge():
     q=0
     nvisit=0
     move=-1
+
 class node():
     def __init__(self,state):
         self.state=state
@@ -24,8 +25,9 @@ class node():
     def expand(self):
         highest=-0.01
         highind=-1
+        factor=0.1
         for i in range(362):
-            if self.edges[i].p/(1+self.edges[i].nvisit)+self.edges[i].q>highest:
+            if self.edges[i].p/(1+self.edges[i].nvisit)*factor+self.edges[i].q>highest:
                 highest=self.edges[i].p/(1+self.edges[i].nvisit)+self.edges[i].q
                 highind=i
 #makemove
@@ -59,6 +61,26 @@ def hashstate(state):
 
 
 def mcts(state,times)
+    allstates=[]
+    start=node(state)
+    allstates.append(start)
+    hashlist=[]
+    for i in range(times):
+#start from scratch
+        revstate=[]
+        revstate.append(0)
+        curstate=allstates[0]
+        while curstate.statehash in hashlist:
+            move=curstate.expand()
+            newstate=makemove(curstate.state,move)
+            newstatehash=hashstate(newstate)
+            if newstatehash in hashlist:
+#find the state which is
+                jj=0
+                while newstatehash!=allstates[jj].statehash:
+                    jj=jj+1
+                
+
 
 
 
