@@ -60,7 +60,7 @@ def hashstate(state):
 
 
 
-def mcts(state,times)
+def mcts(state,times):
     allstates=[]
     start=node(state)
     allstates.append(start)
@@ -68,10 +68,15 @@ def mcts(state,times)
     for i in range(times):
 #start from scratch
         revstate=[]
-        revstate.append(0)
+        revstate.append([0,-1])
         curstate=allstates[0]
-        while curstate.statehash in hashlist:
+        flag=0
+        score=0
+        cur=0
+        while flag==0:
             move=curstate.expand()
+            revstate[cur][1]=move
+            cur+=1
             newstate=makemove(curstate.state,move)
             newstatehash=hashstate(newstate)
             if newstatehash in hashlist:
@@ -79,7 +84,38 @@ def mcts(state,times)
                 jj=0
                 while newstatehash!=allstates[jj].statehash:
                     jj=jj+1
-                
+                revstate.append([jj,-1])
+                curstate=allstates[jj]
+            else:
+                nstate=node(newstate)
+                allstates.append(nstate)
+                hashlist.append(newstatehash)
+                curstate=nstate
+                revstate.append([len(allstates)-1,-1])
+                flag=1
+                score=nstate.value
+                for ib in len(revstate):
+                    wp=revstate[ib]
+                    allstates[wp[0]].visitcount+=1
+                    allstates[wp[0]].value=(allstates[wp[0]].value*(allstates[wp[0]].visitcount-1)+score)/allstates[wp[0]].visitcount
+                for ib in len(revstate)-1:
+                    wp=revstate[ib]
+                    allstates[wp[0]].edges[wp[1]].nvisit+=1
+                    allstates[wp[0]].edges[wp[1]].q=allstates[revstate[ib+1][0]].value
+    maxscore=0
+    maxp=-1
+    visitfac=0.01
+    for i in range(362):
+        if allstates[0].edges[i].nvisit*visitfac+allstates[0].edges[i].q>maxscore:
+            if allstates[0].edges[i].nvisit>10:
+                maxscore=allstates[0].edges[i].nvisit*visitfac+allstates[0].edges[i].q
+                maxp=i
+
+    return maxp
+
+#evaluate
+
+
 
 
 
